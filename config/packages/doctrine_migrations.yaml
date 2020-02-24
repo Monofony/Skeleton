@@ -1,0 +1,3 @@
+doctrine_migrations:
+    dir_name: '%kernel.project_dir%/src/CorePack/recipe/src/Migrations'
+    namespace: App\Migrations
