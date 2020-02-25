@@ -1,7 +1,5 @@
 imports:
     - config/suites.yaml
-    - src/AdminPack/recipe/config/suites.yaml
-    - src/FrontPack/recipe/config/suites.yaml
 
 default:
     formatters:
@@ -17,7 +15,7 @@ default:
             screenshot: true
 
         Behat\MinkExtension:
-            files_path: "%paths.base%/src/CorePack/recipe/tests/Resources/"
+            files_path: "%paths.base%/tests/Resources/"
             base_url: "https://localhost:8080/"
             default_session: symfony
             javascript_session: chrome
@@ -42,13 +40,6 @@ default:
         FriendsOfBehat\SymfonyExtension: ~
 
         FriendsOfBehat\VariadicExtension: ~
-
-        FriendsOfBehat\SuiteSettingsExtension:
-            paths:
-                - "src/CorePack/recipe/features"
-                - "src/AdminPack/recipe/features"
-                - "src/FrontPack/recipe/features"
-                - "features"
 
     gherkin:
         filters:

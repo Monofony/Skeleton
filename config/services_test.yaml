@@ -1,0 +1,13 @@
+parameters:
+    locale: en_US
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+            $spoolDirectory: '%kernel.cache_dir%/spool'
+            $minkParameters: '@behat.mink.parameters'
+
+    App\Tests\Behat\:
+        resource: '../tests/Behat/*'

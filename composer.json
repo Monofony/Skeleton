@@ -9,7 +9,8 @@
         "monofony/api-pack": "^0.1",
         "monofony/core-pack": "^0.1",
         "monofony/fixtures-pack": "^0.1",
-        "monofony/front-pack": "^0.1"
+        "monofony/front-pack": "^0.1",
+        "symfony/flex": "^1.6"
     },
     "require-dev": {
         "monofony/test-pack": "^0.1"
@@ -45,9 +46,6 @@
         "symfony/symfony": "*"
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "0.1-dev"
-        },
         "symfony": {
             "allow-contrib": true,
             "require": "4.4.*"

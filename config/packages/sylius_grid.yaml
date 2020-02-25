@@ -1,7 +1,6 @@
-# Please uncomment to activate grids
-# imports:
-   - { resource: '../config/grids/backend/admin_user.yaml' }
-   - { resource: '../config/grids/backend/customer.yaml' }
+imports:
+   - { resource: '../grids/backend/admin_user.yaml' }
+   - { resource: '../grids/backend/customer.yaml' }
 
 sylius_grid:
     templates:
