@@ -3,7 +3,7 @@ language: php
 dist: trusty
 
 php:
-    - '7.2'
+    - '7.3'
 
 cache:
     yarn: true
@@ -29,6 +29,63 @@ before_install:
 
 install:
     - composer install --no-interaction --prefer-dist
+    - export SYMFONY_ENDPOINT=
+    - composer self-update --2
+    - |
+        composer remove \
+            monofony/api-bundle \
+            monofony/front-bundle \
+            monofony/admin-bundle \
+            monofony/core-bundle \
+            monofony/fixtures-plugin \
+            --no-update --no-scripts --no-plugins
+    - |
+        composer require \
+            monofony/core-pack \
+            monofony/api-pack \
+            monofony/admin-pack \
+            monofony/front-pack \
+            symfony/dotenv:4.4.4 \
+            symfony/flex:^1.9 \
+            symfony/monolog-bundle:^3.1 \
+            symfony/webpack-encore-bundle:^1.7 \
+            --no-update --no-scripts --no-plugins
+    - composer require --dev monofony/test-pack:^0.4 --no-update --no-scripts --no-plugins
+    - rm config/packages/eight_points_guzzle.yaml
+    - rm config/packages/sensio_framework_extra.yaml
+    - rm config/packages/sonata_core.yaml
+
+    - find . name="*.php" -type f -exec sed -i "" 's/Monofony\\Component\\Core\\Model\\User\\AdminUserInterface/Monofony\\Contracts\\Core\\Model\\User\\AdminUserInterface/g' {} \;
+    - find . name="*.php" -type f -exec sed -i "" 's/Monofony\\Component\\Core\\Model\\User\\AdminAvatarInterface/Monofony\\Contracts\\Core\\Model\\User\\AdminAvatarInterface/g' {} \;
+    - find . name="*.php" -type f -exec sed -i "" 's/Monofony\\Component\\Core\\Model\\Media\\FileInterface/Monofony\\Contracts\\Core\\Model\\Media\\FileInterface/g' {} \;
+    - find . name="*.php" -type f -exec sed -i "" 's/Monofony\\Component\\Core\\Model\\User\\AppUserInterface/Monofony\\Contracts\\Core\\Model\\User\\AppUserInterface/g' {} \;
+    - find . name="*.php" -type f -exec sed -i "" 's/Monofony\\Component\\Core\\Model\\Customer\\CustomerInterface/Monofony\\Contracts\\Core\\Model\\Customer\\CustomerInterface/g' {} \;
+    - find . name="*.php" -type f -exec sed -i "" 's/Monofony\\Bundle\\AdminBundle\\Dashboard\\DashboardStatisticsProviderInterface/Monofony\\Contracts\\Admin\\Dashboard\\DashboardStatisticsProviderInterface/g' {} \;
+    - find . name="*.php" -type f -exec sed -i "" 's/Monofony\\Bundle\\CoreBundle\\Tests\\Behat\\Service\\AdminSecurityServiceInterface/Monofony\\Bridge\\Behat\\Service\\AdminSecurityServiceInterface/g' {} \;
+    - find . name="*.yaml" -type f -exec sed -i "" 's/Monofony\\Bundle\\CoreBundle\\Entity\\OAuth\\ClientManager/monofony.client_manager/g' {} \;
+    - find . name="*.yaml" -type f -exec sed -i "" 's/vendor\/monofony\/core-bundle\/Resources\/config\/services_test.yaml/vendor\/monofony\/behat-bridge\/services_test.yaml/g' {} \;
+
+    - sed -i "" 's/Doctrine\\Bundle\\FixturesBundle/\/\/ Doctrine\\Bundle\\FixturesBundle/g' config/bundles.php
+    - sed -i "" 's/EightPoints\\Bundle\\GuzzleBundle/\/\/ EightPoints\\Bundle\\GuzzleBundle/g' config/bundles.php
+    - sed -i "" 's/Monofony\\Bundle\\ApiBundle/\/\/ Monofony\\Bundle\\ApiBundle/g' config/bundles.php
+    - sed -i "" 's/Monofony\\Plugin\\FixturesPlugin/\/\/ Monofony\\Plugin\\FixturesPlugin/g' config/bundles.php
+    - sed -i "" 's/Monofony\\Bundle\\FrontBundle/\/\/ Monofony\\Bundle\\FrontBundle/g' config/bundles.php
+    - sed -i "" 's/Sonata\\CoreBundle\\SonataCoreBundle/\/\/ Sonata\\CoreBundle\\SonataCoreBundle/g' config/bundles.php
+    - sed -i "" 's/Sensio\\Bundle\\FrameworkExtraBundle/\/\/ Sensio\\Bundle\\FrameworkExtraBundle/g' config/bundles.php
+
+    - composer update
+
+    # Migrations
+
+    - composer require symfony/dotenv symfony/validator symfony/monolog-bundle --no-scripts
+    - composer remove monofony/api-bundle
+    - composer remove monofony/front-bundle
+    - composer remove monofony/admin-bundle
+    - composer remove monofony/fixtures-plugin
+    - composer remove monofony/core-bundle --no-update
+    - composer require --dev monofony/test-pack:^0.4 -W
+    - composer require monofony/core-pack:^0.4 monofony/core-pack:^0.4 monofony/api-pack:^0.4 -W
+
     - composer dump-env test
     - yarn install
 
