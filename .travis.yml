@@ -55,23 +55,23 @@ install:
     - rm config/packages/sensio_framework_extra.yaml
     - rm config/packages/sonata_core.yaml
 
-    - find . name="*.php" -type f -exec sed -i "" 's/Monofony\\Component\\Core\\Model\\User\\AdminUserInterface/Monofony\\Contracts\\Core\\Model\\User\\AdminUserInterface/g' {} \;
-    - find . name="*.php" -type f -exec sed -i "" 's/Monofony\\Component\\Core\\Model\\User\\AdminAvatarInterface/Monofony\\Contracts\\Core\\Model\\User\\AdminAvatarInterface/g' {} \;
-    - find . name="*.php" -type f -exec sed -i "" 's/Monofony\\Component\\Core\\Model\\Media\\FileInterface/Monofony\\Contracts\\Core\\Model\\Media\\FileInterface/g' {} \;
-    - find . name="*.php" -type f -exec sed -i "" 's/Monofony\\Component\\Core\\Model\\User\\AppUserInterface/Monofony\\Contracts\\Core\\Model\\User\\AppUserInterface/g' {} \;
-    - find . name="*.php" -type f -exec sed -i "" 's/Monofony\\Component\\Core\\Model\\Customer\\CustomerInterface/Monofony\\Contracts\\Core\\Model\\Customer\\CustomerInterface/g' {} \;
-    - find . name="*.php" -type f -exec sed -i "" 's/Monofony\\Bundle\\AdminBundle\\Dashboard\\DashboardStatisticsProviderInterface/Monofony\\Contracts\\Admin\\Dashboard\\DashboardStatisticsProviderInterface/g' {} \;
-    - find . name="*.php" -type f -exec sed -i "" 's/Monofony\\Bundle\\CoreBundle\\Tests\\Behat\\Service\\AdminSecurityServiceInterface/Monofony\\Bridge\\Behat\\Service\\AdminSecurityServiceInterface/g' {} \;
-    - find . name="*.yaml" -type f -exec sed -i "" 's/Monofony\\Bundle\\CoreBundle\\Entity\\OAuth\\ClientManager/monofony.client_manager/g' {} \;
-    - find . name="*.yaml" -type f -exec sed -i "" 's/vendor\/monofony\/core-bundle\/Resources\/config\/services_test.yaml/vendor\/monofony\/behat-bridge\/services_test.yaml/g' {} \;
+    - find . name="*.php" -type f -exec sed -i -e 's/Monofony\\Component\\Core\\Model\\User\\AdminUserInterface/Monofony\\Contracts\\Core\\Model\\User\\AdminUserInterface/g' {} \;
+    - find . name="*.php" -type f -exec sed -i -e 's/Monofony\\Component\\Core\\Model\\User\\AdminAvatarInterface/Monofony\\Contracts\\Core\\Model\\User\\AdminAvatarInterface/g' {} \;
+    - find . name="*.php" -type f -exec sed -i -e 's/Monofony\\Component\\Core\\Model\\Media\\FileInterface/Monofony\\Contracts\\Core\\Model\\Media\\FileInterface/g' {} \;
+    - find . name="*.php" -type f -exec sed -i -e 's/Monofony\\Component\\Core\\Model\\User\\AppUserInterface/Monofony\\Contracts\\Core\\Model\\User\\AppUserInterface/g' {} \;
+    - find . name="*.php" -type f -exec sed -i -e 's/Monofony\\Component\\Core\\Model\\Customer\\CustomerInterface/Monofony\\Contracts\\Core\\Model\\Customer\\CustomerInterface/g' {} \;
+    - find . name="*.php" -type f -exec sed -i -e 's/Monofony\\Bundle\\AdminBundle\\Dashboard\\DashboardStatisticsProviderInterface/Monofony\\Contracts\\Admin\\Dashboard\\DashboardStatisticsProviderInterface/g' {} \;
+    - find . name="*.php" -type f -exec sed -i -e 's/Monofony\\Bundle\\CoreBundle\\Tests\\Behat\\Service\\AdminSecurityServiceInterface/Monofony\\Bridge\\Behat\\Service\\AdminSecurityServiceInterface/g' {} \;
+    - find . name="*.yaml" -type f -exec sed -i -e 's/Monofony\\Bundle\\CoreBundle\\Entity\\OAuth\\ClientManager/monofony.client_manager/g' {} \;
+    - find . name="*.yaml" -type f -exec sed -i -e 's/vendor\/monofony\/core-bundle\/Resources\/config\/services_test.yaml/vendor\/monofony\/behat-bridge\/services_test.yaml/g' {} \;
 
-    - sed -i "" 's/Doctrine\\Bundle\\FixturesBundle/\/\/ Doctrine\\Bundle\\FixturesBundle/g' config/bundles.php
-    - sed -i "" 's/EightPoints\\Bundle\\GuzzleBundle/\/\/ EightPoints\\Bundle\\GuzzleBundle/g' config/bundles.php
-    - sed -i "" 's/Monofony\\Bundle\\ApiBundle/\/\/ Monofony\\Bundle\\ApiBundle/g' config/bundles.php
-    - sed -i "" 's/Monofony\\Plugin\\FixturesPlugin/\/\/ Monofony\\Plugin\\FixturesPlugin/g' config/bundles.php
-    - sed -i "" 's/Monofony\\Bundle\\FrontBundle/\/\/ Monofony\\Bundle\\FrontBundle/g' config/bundles.php
-    - sed -i "" 's/Sonata\\CoreBundle\\SonataCoreBundle/\/\/ Sonata\\CoreBundle\\SonataCoreBundle/g' config/bundles.php
-    - sed -i "" 's/Sensio\\Bundle\\FrameworkExtraBundle/\/\/ Sensio\\Bundle\\FrameworkExtraBundle/g' config/bundles.php
+    - sed -i -e 's/Doctrine\\Bundle\\FixturesBundle/\/\/ Doctrine\\Bundle\\FixturesBundle/g' config/bundles.php
+    - sed -i -e 's/EightPoints\\Bundle\\GuzzleBundle/\/\/ EightPoints\\Bundle\\GuzzleBundle/g' config/bundles.php
+    - sed -i -e 's/Monofony\\Bundle\\ApiBundle/\/\/ Monofony\\Bundle\\ApiBundle/g' config/bundles.php
+    - sed -i -e 's/Monofony\\Plugin\\FixturesPlugin/\/\/ Monofony\\Plugin\\FixturesPlugin/g' config/bundles.php
+    - sed -i -e 's/Monofony\\Bundle\\FrontBundle/\/\/ Monofony\\Bundle\\FrontBundle/g' config/bundles.php
+    - sed -i -e 's/Sonata\\CoreBundle\\SonataCoreBundle/\/\/ Sonata\\CoreBundle\\SonataCoreBundle/g' config/bundles.php
+    - sed -i -e 's/Sensio\\Bundle\\FrameworkExtraBundle/\/\/ Sensio\\Bundle\\FrameworkExtraBundle/g' config/bundles.php
 
     - composer update
 
