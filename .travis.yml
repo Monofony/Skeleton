@@ -51,19 +51,13 @@ install:
             symfony/webpack-encore-bundle:^1.7 \
             --no-update --no-scripts --no-plugins
     - composer require --dev monofony/test-pack:^0.4 --no-update --no-scripts --no-plugins
+    # Not needed anymore but you can remove them later...
+    - composer require \
+        eightpoints/guzzle-bundle:^7.3 \
+        sensio/framework-extra-bundle:^5.1 \
+        --no-update --no-scripts --no-plugins
 
     - bin/upgrade-to-0.4
-    - find ./config -type f -exec sed -i -e 's/Monofony\\Bundle\\CoreBundle\\Entity\\OAuth\\ClientManager/monofony.client_manager/g' {} \;
-    - find ./config -type f -exec sed -i -e 's/vendor\/monofony\/core-bundle\/Resources\/config\/services_test.yaml/vendor\/monofony\/behat-bridge\/services_test.yaml/g' {} \;
-
-    - sed -i -e 's/Doctrine\\Bundle\\FixturesBundle/\/\/ Doctrine\\Bundle\\FixturesBundle/g' config/bundles.php
-    - sed -i -e 's/EightPoints\\Bundle\\GuzzleBundle/\/\/ EightPoints\\Bundle\\GuzzleBundle/g' config/bundles.php
-    - sed -i -e 's/Monofony\\Bundle\\AdminBundle/\/\/ Monofony\\Bundle\\AdminBundle/g' config/bundles.php
-    - sed -i -e 's/Monofony\\Bundle\\ApiBundle/\/\/ Monofony\\Bundle\\ApiBundle/g' config/bundles.php
-    - sed -i -e 's/Monofony\\Plugin\\FixturesPlugin/\/\/ Monofony\\Plugin\\FixturesPlugin/g' config/bundles.php
-    - sed -i -e 's/Monofony\\Bundle\\FrontBundle/\/\/ Monofony\\Bundle\\FrontBundle/g' config/bundles.php
-    - sed -i -e 's/Sonata\\CoreBundle\\SonataCoreBundle/\/\/ Sonata\\CoreBundle\\SonataCoreBundle/g' config/bundles.php
-    - sed -i -e 's/Sensio\\Bundle\\FrameworkExtraBundle/\/\/ Sensio\\Bundle\\FrameworkExtraBundle/g' config/bundles.php
 
     - composer update
 
