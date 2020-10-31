@@ -1,0 +1,46 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
+
+require dirname(__DIR__).'/vendor/autoload.php';
+
+$filesystem = new Filesystem();
+$projectDir = dirname(__DIR__);
+
+$filesystem->remove($projectDir.'/config/packages/eight_points_guzzle.yaml');
+$filesystem->remove($projectDir.'/config/packages/sensio_framework_extra.yaml');
+$filesystem->remove($projectDir.'/config/packages/sonata_core.yaml');
+
+$finder = new Finder();
+$finder
+    ->files()
+    ->in($projectDir)
+    ->in($projectDir)
+    ->exclude(['bin', 'vendor', 'var'])
+;
+
+$interfaces = [
+    'Monofony\\Component\\Core\\Model\\User\\AdminUserInterface' => 'Monofony\\Contracts\\Core\\Model\\User\\AdminUserInterface',
+    'Monofony\\Component\\Core\\Model\\User\\AdminAvatarInterface' => 'Monofony\\Contracts\\Core\\Model\\User\\AdminAvatarInterface',
+    'Monofony\\Component\\Core\\Model\\Media\\FileInterface' => 'Monofony\\Contracts\\Core\\Model\\Media\\FileInterface',
+    'Monofony\\Component\\Core\\Model\\User\\AppUserInterface' => 'Monofony\\Contracts\\Core\\Model\\User\\AppUserInterface',
+    'Monofony\\Component\\Core\\Model\\Customer\\CustomerInterface' => 'Monofony\\Contracts\\Core\\Model\\Customer\\CustomerInterface',
+    'Monofony\\Bundle\\AdminBundle\\Dashboard\\DashboardStatisticsProviderInterface' => 'Monofony\\Contracts\\Admin\\Dashboard\\DashboardStatisticsProviderInterface',
+    'Monofony\\Bundle\\CoreBundle\\Tests\\Behat\\Service\\AdminSecurityServiceInterface' => 'Monofony\\Bridge\\Behat\\Service\\AdminSecurityServiceInterface',
+];
+
+foreach ($finder as $file) {
+    $content = file_get_contents($file->getRelativePathname());
+
+    foreach ($interfaces as $pattern => $replacement) {
+        $pattern = '/'.addslashes($pattern).'/s';
+
+        if (preg_match($pattern, $content)) {
+
+            $content = preg_replace($pattern, $replacement, $content);
+            $filesystem->dumpFile($file->getRelativePathname(), $content);
+        }
+    }
+}

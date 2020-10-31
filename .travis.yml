@@ -51,17 +51,8 @@ install:
             symfony/webpack-encore-bundle:^1.7 \
             --no-update --no-scripts --no-plugins
     - composer require --dev monofony/test-pack:^0.4 --no-update --no-scripts --no-plugins
-    - rm config/packages/eight_points_guzzle.yaml
-    - rm config/packages/sensio_framework_extra.yaml
-    - rm config/packages/sonata_core.yaml
 
-    - find ./src -type f -exec sed -i -e 's/Monofony\\Component\\Core\\Model\\User\\AdminUserInterface/Monofony\\Contracts\\Core\\Model\\User\\AdminUserInterface/g' {} \;
-    - find ./src -type f -exec sed -i -e 's/Monofony\\Component\\Core\\Model\\User\\AdminAvatarInterface/Monofony\\Contracts\\Core\\Model\\User\\AdminAvatarInterface/g' {} \;
-    - find ./src -type f -exec sed -i -e 's/Monofony\\Component\\Core\\Model\\Media\\FileInterface/Monofony\\Contracts\\Core\\Model\\Media\\FileInterface/g' {} \;
-    - find ./src -type f -exec sed -i -e 's/Monofony\\Component\\Core\\Model\\User\\AppUserInterface/Monofony\\Contracts\\Core\\Model\\User\\AppUserInterface/g' {} \;
-    - find ./src -type f -exec sed -i -e 's/Monofony\\Component\\Core\\Model\\Customer\\CustomerInterface/Monofony\\Contracts\\Core\\Model\\Customer\\CustomerInterface/g' {} \;
-    - find ./src -type f -exec sed -i -e 's/Monofony\\Bundle\\AdminBundle\\Dashboard\\DashboardStatisticsProviderInterface/Monofony\\Contracts\\Admin\\Dashboard\\DashboardStatisticsProviderInterface/g' {} \;
-    - find ./tests -type f -exec sed -i -e 's/Monofony\\Bundle\\CoreBundle\\Tests\\Behat\\Service\\AdminSecurityServiceInterface/Monofony\\Bridge\\Behat\\Service\\AdminSecurityServiceInterface/g' {} \;
+    - bin/upgrade-to-0.4
     - find ./config -type f -exec sed -i -e 's/Monofony\\Bundle\\CoreBundle\\Entity\\OAuth\\ClientManager/monofony.client_manager/g' {} \;
     - find ./config -type f -exec sed -i -e 's/vendor\/monofony\/core-bundle\/Resources\/config\/services_test.yaml/vendor\/monofony\/behat-bridge\/services_test.yaml/g' {} \;
 
@@ -75,17 +66,6 @@ install:
     - sed -i -e 's/Sensio\\Bundle\\FrameworkExtraBundle/\/\/ Sensio\\Bundle\\FrameworkExtraBundle/g' config/bundles.php
 
     - composer update
-
-    # Migrations
-
-    - composer require symfony/dotenv symfony/validator symfony/monolog-bundle --no-scripts
-    - composer remove monofony/api-bundle
-    - composer remove monofony/front-bundle
-    - composer remove monofony/admin-bundle
-    - composer remove monofony/fixtures-plugin
-    - composer remove monofony/core-bundle --no-update
-    - composer require --dev monofony/test-pack:^0.4 -W
-    - composer require monofony/core-pack:^0.4 monofony/core-pack:^0.4 monofony/api-pack:^0.4 -W
 
     - composer dump-env test
     - yarn install
