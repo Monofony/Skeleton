@@ -9,13 +9,18 @@ require dirname(__DIR__).'/vendor/autoload.php';
 $filesystem = new Filesystem();
 $projectDir = dirname(__DIR__);
 
-// $filesystem->remove($projectDir.'/config/packages/eight_points_guzzle.yaml');
-// $filesystem->remove($projectDir.'/config/packages/sensio_framework_extra.yaml');
-$filesystem->remove($projectDir.'/config/packages/sonata_core.yaml');
-
+removeLegacyConfigFiles($filesystem, $projectDir);
 updateConfig($filesystem, $projectDir);
-// removeLegacyBundles($filesystem, $projectDir);
+removeLegacyBundles($filesystem, $projectDir);
 replaceClasses($filesystem, $projectDir);
+updateKernel($filesystem, $projectDir);
+
+function removeLegacyConfigFiles(Filesystem $filesystem, string $projectDir): void
+{
+    // $filesystem->remove($projectDir.'/config/packages/eight_points_guzzle.yaml');
+    // $filesystem->remove($projectDir.'/config/packages/sensio_framework_extra.yaml');
+    $filesystem->remove($projectDir.'/config/packages/sonata_core.yaml');
+}
 
 function updateConfig(Filesystem $filesystem, string $projectDir): void
 {
@@ -95,6 +100,8 @@ function replaceClasses(Filesystem $filesystem, string $projectDir): void
         'Monofony\\\Bundle\\\AdminBundle\\\Tests\\\Behat\\\Crud\\\CreatePageInterface' => 'Monofony\\\Bridge\\\Behat\\\Crud\\\CreatePageInterface',
         'Monofony\\\Bundle\\\AdminBundle\\\Tests\\\Behat\\\Crud\\\IndexPageInterface' => 'Monofony\\\Bridge\\\Behat\\\Crud\\\IndexPageInterface',
         'Monofony\\\Bundle\\\AdminBundle\\\Tests\\\Behat\\\Crud\\\UpdatePageInterface' => 'Monofony\\\Bridge\\\Behat\\\Crud\\\UpdatePageInterface',
+        'Monofony\\\Bundle\\\CoreBundle\\\Tests\\\Behat\\\Behaviour\\\Toggles' => 'Monofony\\\Bridge\\\Behat\\\Behaviour\\\Toggles',
+        'Monofony\\\Bundle\\\CoreBundle\\\Tests\\\Behat\\\Service\\\Accessor\\\TableAccessorInterface' => 'Monofony\\\Bridge\\\Behat\\\Service\\\Accessor\\\TableAccessorInterface',
     ];
 
     if (!is_file($projectDir.'/src/Fixture/Factory/AbstractExampleFactory.php')) {
@@ -124,5 +131,13 @@ function replaceClasses(Filesystem $filesystem, string $projectDir): void
             }
         }
     }
+}
+
+function updateKernel(Filesystem $filesystem, string $projectDir): void
+{
+    $pathName = $projectDir.'/src/Kernel.php';
+    $content = file_get_contents($pathName);
+    $content = str_replace('return MockerContainer::class;', '// return MockerContainer::class;', $content);
+    $filesystem->dumpFile($pathName, $content);
 }
 
