@@ -11,6 +11,7 @@ $projectDir = dirname(__DIR__);
 
 removeLegacyConfigFiles($filesystem, $projectDir);
 updateConfig($filesystem, $projectDir);
+updatePhpstanConfig($filesystem, $projectDir);
 removeLegacyBundles($filesystem, $projectDir);
 replaceClasses($filesystem, $projectDir);
 updateKernel($filesystem, $projectDir);
@@ -45,6 +46,22 @@ function updateConfig(Filesystem $filesystem, string $projectDir): void
                 $filesystem->dumpFile('config/'.$file->getRelativePathname(), $content);
             }
         }
+    }
+}
+
+function updatePhpstanConfig(Filesystem $filesystem, string $projectDir): void
+{
+    $replacements = [
+        '- vendor/phpstan/phpstan-symfony/extension.neon' => '',
+        'specDir: \'spec/\'' => '',
+    ];
+
+    $relativePathname = $projectDir.'/phpstan.neon';
+    $content = file_get_contents($relativePathname);
+
+    foreach ($replacements as $pattern => $replacement) {
+        $content = str_replace($pattern, $replacement, $content);
+        $filesystem->dumpFile($relativePathname, $content);
     }
 }
 
