@@ -102,6 +102,7 @@ function replaceClasses(Filesystem $filesystem, string $projectDir): void
         'Monofony\\\Bundle\\\AdminBundle\\\Tests\\\Behat\\\Crud\\\UpdatePageInterface' => 'Monofony\\\Bridge\\\Behat\\\Crud\\\UpdatePageInterface',
         'Monofony\\\Bundle\\\CoreBundle\\\Tests\\\Behat\\\Behaviour\\\Toggles' => 'Monofony\\\Bridge\\\Behat\\\Behaviour\\\Toggles',
         'Monofony\\\Bundle\\\CoreBundle\\\Tests\\\Behat\\\Service\\\Accessor\\\TableAccessorInterface' => 'Monofony\\\Bridge\\\Behat\\\Service\\\Accessor\\\TableAccessorInterface',
+        'Monofony\\\Bundle\\\AdminBundle\\\Dashboard\\\Statistics\\\StatisticInterface' => 'Monofony\\\Component\\\Admin\\\Dashboard\\\Statistics\\\StatisticInterface',
     ];
 
     if (!is_file($projectDir.'/src/Fixture/Factory/AbstractExampleFactory.php')) {
@@ -115,6 +116,13 @@ function replaceClasses(Filesystem $filesystem, string $projectDir): void
         copy(
             'https://raw.githubusercontent.com/Monofony/Monofony/0.4/src/Monofony/Pack/CorePack/.recipe/src/Fixture/Factory/ExampleFactoryInterface.php',
             $projectDir.'/src/Fixture/Factory/ExampleFactoryInterface.php'
+        );
+    }
+
+    if (!is_file($projectDir.'/src/Fixture/AbstractResourceFixture.php')) {
+        copy(
+            'https://raw.githubusercontent.com/Monofony/Monofony/0.4/src/Monofony/Pack/CorePack/.recipe/src/Fixture/AbstractResourceFixture.php',
+            $projectDir.'/src/Fixture/AbstractResourceFixture.php'
         );
     }
 
