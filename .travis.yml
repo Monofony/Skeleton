@@ -3,7 +3,7 @@ language: php
 dist: trusty
 
 php:
-    - '7.2'
+    - '7.3'
 
 cache:
     yarn: true
@@ -29,6 +29,44 @@ before_install:
 
 install:
     - composer install --no-interaction --prefer-dist
+    - export SYMFONY_ENDPOINT=
+    - composer self-update --2
+    - |
+        composer remove \
+            monofony/api-bundle \
+            monofony/front-bundle \
+            monofony/admin-bundle \
+            monofony/core-bundle \
+            monofony/fixtures-plugin \
+            --no-update --no-scripts --no-plugins
+    - |
+        composer require \
+            monofony/core-pack \
+            monofony/api-pack \
+            monofony/admin-pack \
+            monofony/front-pack \
+            symfony/dotenv:4.4.* \
+            symfony/flex:^1.9 \
+            symfony/monolog-bundle:^3.1 \
+            symfony/webpack-encore-bundle:^1.7 \
+            --no-update --no-scripts --no-plugins
+    - composer require --dev monofony/test-pack:^0.4 --no-update --no-scripts --no-plugins
+    # Not needed anymore but you can remove them later...
+    - |
+        composer require \
+            eightpoints/guzzle-bundle:^7.3 \
+            sensio/framework-extra-bundle:^5.1 \
+            sensiolabs/security-checker:^5.0 \
+            sylius/mailer-bundle \
+            twig/extensions \
+            --no-update --no-scripts --no-plugins
+
+    - php -r "copy('https://raw.githubusercontent.com/Monofony/Monofony/0.x/bin/upgrade-to-0.4', 'bin/upgrade-to-0.4');"
+    - chmod a+x bin/upgrade-to-0.4
+    - bin/upgrade-to-0.4
+
+    - composer update
+
     - composer dump-env test
     - yarn install
 
