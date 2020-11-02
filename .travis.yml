@@ -58,6 +58,7 @@ install:
             sensio/framework-extra-bundle:^5.1 \
             sensiolabs/security-checker:^5.0 \
             sylius/mailer-bundle \
+            twig/extensions \
             --no-update --no-scripts --no-plugins
 
     - bin/upgrade-to-0.4

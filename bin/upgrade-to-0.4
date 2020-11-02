@@ -125,6 +125,7 @@ function replaceClasses(Filesystem $filesystem, string $projectDir): void
         'App\\\Tests\\\Behat\\\NotificationType' => 'Monofony\\\Bridge\\\Behat\\\NotificationType',
         'Lakion\\\ApiTestCase\\\JsonApiTestCase' => 'ApiTestCase\\\JsonApiTestCase',
         'use Monofony\\\Plugin\\\FixturesPlugin\\\Fixture\\\AbstractResourceFixture;\n' => '',
+        'use PSS\\\SymfonyMockerContainer\\\DependencyInjection\\\MockerContainer;\n' => '',
     ];
 
     $filesystem->remove($projectDir.'/tests/Behat/NotificationType.php');
