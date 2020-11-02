@@ -105,8 +105,11 @@ function replaceClasses(Filesystem $filesystem, string $projectDir): void
         'Monofony\\\Bundle\\\AdminBundle\\\Dashboard\\\Statistics\\\StatisticInterface' => 'Monofony\\\Component\\\Admin\\\Dashboard\\\Statistics\\\StatisticInterface',
         'Monofony\\\Bundle\\\FrontBundle\\\Menu\\\AccountMenuBuilderInterface' => 'Monofony\\\Contracts\\\Front\\\Menu\\\AccountMenuBuilderInterface',
         'Monofony\\\Bundle\\\AdminBundle\\\Menu\\\AdminMenuBuilderInterface' => 'Monofony\\\Component\\\Admin\\\Menu\\\AdminMenuBuilderInterface',
+        'App\\Tests\\Behat\\NotificationType' => 'Monofony\\\Bridge\\\Behat\\\NotificationType',
         'use Monofony\\\Plugin\\\FixturesPlugin\\\Fixture\\\AbstractResourceFixture;\n' => '',
     ];
+
+    $filesystem->remove($projectDir.'/tests/Behat/NotificationType.php');
 
     if (!is_file($projectDir.'/src/Fixture/Factory/AbstractExampleFactory.php')) {
         copy(
