@@ -62,6 +62,7 @@ install:
             --no-update --no-scripts --no-plugins
 
     - php -r "copy('https://raw.githubusercontent.com/Monofony/Monofony/0.x/bin/upgrade-to-0.4', 'bin/upgrade-to-0.4');"
+    - chmod a+x bin/upgrade-to-0.4
     - bin/upgrade-to-0.4
 
     - composer update
