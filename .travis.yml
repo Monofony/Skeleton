@@ -50,7 +50,7 @@ install:
             symfony/monolog-bundle:^3.1 \
             symfony/webpack-encore-bundle:^1.7 \
             --no-update --no-scripts --no-plugins
-    - composer require --dev monofony/test-pack:^0.4 --noupdate --no-scripts --no-plugins
+    - composer require --dev monofony/test-pack:^0.4 --no-update --no-scripts --no-plugins
     # Not needed anymore but you can remove them later...
     - |
         composer require \
