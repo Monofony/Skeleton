@@ -8,7 +8,7 @@
         "monofony/admin-pack": "^0.4",
         "monofony/core-pack": "^0.4",
         "monofony/fos-oauth-server-bridge": "^0.4",
-        "symfony/dotenv": "4.4.*",
+        "symfony/dotenv": "5.1.*",
         "symfony/flex": "^1.9",
         "symfony/monolog-bundle": "^3.1",
         "symfony/webpack-encore-bundle": "^1.7"
