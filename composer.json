@@ -14,7 +14,7 @@
         "symfony/webpack-encore-bundle": "^1.9"
     },
     "require-dev": {
-        "monofony/test-pack": "0.6.*"
+        "monofony/test-pack": "0.7.*"
     },
     "config": {
         "optimize-autoloader": true,
