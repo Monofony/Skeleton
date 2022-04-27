@@ -6,7 +6,7 @@
     "require": {
         "php": "^8.0",
         "doctrine/doctrine-migrations-bundle": "3.1.*",
-        "doctrine/migrations": "3.2.*",
+        "doctrine/migrations": "3.5.*",
         "monofony/admin-pack": "^0.8@beta",
         "monofony/core-pack": "^0.8@beta",
         "symfony/dotenv": "5.4.*",
