@@ -20,7 +20,7 @@
         "dbrekelmans/bdi": "^1.0",
         "monofony/test-pack": "^0.8@beta",
         "robertfausk/behat-panther-extension": "^1.1",
-        "symfony/phpunit-bridge": "^5.4"
+        "symfony/phpunit-bridge": "^6.1"
     },
     "config": {
         "allow-plugins": {
