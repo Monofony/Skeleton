@@ -4,31 +4,22 @@ includes:
 	- vendor/phpstan/phpstan-webmozart-assert/extension.neon
 
 parameters:
+    level: 5
+    paths:
+        - src
     reportUnmatchedIgnoredErrors: false
 
     symfony:
          container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml
 
     excludePaths:
-        # Makes PHPStan crash
-        - '**/DependencyInjection/Configuration.php'
-
-        # Test dependencies
-        - 'spec/**.php'
-        - 'tests/**.php'
-
-        # These packages aren't in require-dev of the global package
-        - '**MongoDB**'
-        - '**ODM**'
 
     ignoreErrors:
         # Magic calls
         - '/Call to an undefined static method Webmozart\\Assert\\Assert::all/'
         - '/Call to an undefined static method Webmozart\\Assert\\Assert::nullOr/'
         - '/Call to an undefined method Faker\\Generator::/'
+        - '/Call to an undefined method Symfony\\Component\\Console\\Helper\\HelperInterface::ask\(\)/'
         - '/Access to an undefined property Faker\\Generator::/'
         - '/Method Mockery\\MockInterface::shouldReceive\(\) invoked with 1 parameter, 0 required/'
-
-        # These packages aren't in require-dev of the global package
-        - '/Class Doctrine\\Bundle\\MongoDBBundle/'
-        - '/Class Doctrine\\Bundle\\PHPCRBundle/'
+        - '/Parameter #3 \$questionHelper of method App\\Installer\\Provider\\DatabaseSetupCommandsProviderInterface::getCommands\(\) expects Symfony\\Component\\Console\\Helper\\QuestionHelper, Symfony\\Component\\Console\\Helper\\HelperInterface given/'
